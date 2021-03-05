@@ -28,7 +28,7 @@ existing.forEach(file => {
 });
 
 // Build variants
-createWebSaver('Random');
+createWebSaver('Shuffle', undefined);
 colorPalettes.forEach((name, i) => {
   createWebSaver(name, i);
 });
@@ -44,9 +44,7 @@ function createWebSaver(colorPaletteName, colorPaletteIndex = undefined) {
   fse.copySync(templateDir, saverDir);
   fse.copySync(sourcesDir, resourcesDir);
 
-  if (colorPaletteIndex !== undefined) {
-    replaceFiles(saverDir, saverName, colorPaletteIndex);
-  }
+  replaceFiles(saverDir, saverName, colorPaletteIndex);
 }
 
 function webSaverDir(saverName) {
@@ -67,6 +65,10 @@ function replaceFiles(saverDir, saverName, colorPaletteIndex) {
   plist = plist.replace(
     /<key>CFBundleName<\/key>\s+<string>Web<\/string>/mg,
     `<key>CFBundleName</key><string>${saverName}</string>`
+  );
+  plist = plist.replace(
+    /<key>CFBundleIdentifier<\/key>\s+<string>com.yourcompany.Web<\/string>/mg,
+    `<key>CFBundleIdentifier</key><string>io.github.kalabasa.${saverName}</string>`
   );
 
   fs.writeFileSync(htmlPath, html);
