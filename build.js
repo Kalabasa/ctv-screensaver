@@ -19,9 +19,12 @@ const colorPalettes = [
 
 const sourcesDir = path.resolve(__dirname, 'Sources');
 const templateDir = path.resolve(__dirname, 'Web.template.saver');
+const outputDir = path.resolve(__dirname, 'build');
+
+fse.mkdirpSync(outputDir);
 
 // Cleanup
-const existing = glob.sync(path.resolve(__dirname, 'OSX', '*.saver'));
+const existing = glob.sync(path.resolve(outputDir, '*.saver'));
 existing.forEach(file => {
   console.log(`Cleaning ${file}`);
   fse.removeSync(file);
@@ -48,7 +51,7 @@ function createWebSaver(colorPaletteName, colorPaletteIndex = undefined) {
 }
 
 function webSaverDir(saverName) {
-  return path.resolve(__dirname, 'OSX', `${saverName}.saver`);
+  return path.resolve(outputDir, `${saverName}.saver`);
 }
 
 function replaceFiles(saverDir, saverName, colorPaletteIndex) {
