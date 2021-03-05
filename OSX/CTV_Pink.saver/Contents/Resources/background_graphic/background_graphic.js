@@ -46,7 +46,7 @@ const BackgroundGraphic = (() => {
       height = 100 * height / sizeMax;
 
       const angle = Math.random() * Math.PI * 2;
-      const startRadius = (25 + Math.random() * 20) * sizeMin / sizeMax;
+      const startRadius = (40 + Math.random() * 15) * sizeMin / sizeMax;
       const endRadius = Math.hypot(width, height);
       const startTime = Date.now();
       const duration = 1000;
