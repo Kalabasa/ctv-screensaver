@@ -6,10 +6,13 @@
   <link rel="stylesheet" href="./background_graphic/background_graphic.css" />
   <script>
     COLOR_PALETTE = undefined;
+    if (location.search) {
+      COLOR_PALETTE = parseInt(location.search.slice(1));
+    }
   </script>
 </head>
 
-<body>
+<body style="background: black">
   <div id="graphicsContainer"></div>
   <div class="mainTextContainer">
     <div id="timeSizer" aria-hidden="true"></div>
