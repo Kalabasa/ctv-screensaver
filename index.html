@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CTV screensaver</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+    }
+
+    #iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 0;
+    }
+
+    .hud {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 4vmin;
+      z-index: 1;
+    }
+
+    .credits {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 4vmin;
+      z-index: 1;
+    }
+
+    select,
+    button,
+    a.button {
+      padding: 8px;
+      min-width: 40px;
+      border: none;
+      border-radius: 8px;
+      font: inherit;
+      background: white;
+      color: inherit;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+    const variants = [
+      // Keep color palettes in sync with script.js
+      'Salmon',
+      'Pink',
+      'Gold',
+      'White',
+      'Yellow',
+      'Cyan',
+      'Purple',
+      'Blue',
+      'Dark',
+      'Black',
+      // Extra option
+      'Shuffle',
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const iframe = document.getElementById('iframe');
+      const refresh = document.getElementById('refresh');
+      const select = document.getElementById('select');
+      const download = document.getElementById('download');
+
+      refresh.addEventListener('click', () => {
+        iframe.src += '';
+      });
+
+      variants.forEach((name, i) => {
+        const option = document.createElement('option');
+        option.selected = name === 'Shuffle';
+        option.value = i;
+        option.textContent = name;
+        select.appendChild(option);
+      });
+
+      select.addEventListener('change', onSelect);
+      onSelect();
+    });
+
+    function onSelect() {
+      const name = variants[select.value];
+      iframe.src = `./Sources/${name === 'Shuffle' ? '' : '?' + select.value}`;
+      download.href = `https://github.com/Kalabasa/ctv-screensaver/releases/download/v1/CTV_${name}.saver.zip`;
+    };
+  </script>
+
+</head>
+
+<body>
+  <iframe id="iframe" src="./Sources/"></iframe>
+  <div class="hud">
+    <button id="refresh" aria-label="Refresh" title="Refresh">↺</button>
+    <select id="select"></select>
+    <a id="download" class="button" download>Download as MacOS screensaver</a>
+  </div>
+  <div class="credits">
+    <div><a href="https://github.com/Kalabasa/ctv-screensaver">Source (Github).</a></div>
+    <div><a href="https://github.com/tlrobinson/WebSaver">Built on WebSaver.</a></div>
+  </div>
+</body>
+
+</html>
