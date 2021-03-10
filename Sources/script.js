@@ -55,7 +55,7 @@ const colorPalettes = [
 let timeStringCached = '';
 let graphics = [];
 
-const timeSeed = Date.now();
+const timeSeed = Math.floor(Date.now() / 1000);
 const timeRandom = () => ((timeSeed * 51327) % 311731) / 311731;
 
 init();
