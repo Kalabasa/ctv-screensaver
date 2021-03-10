@@ -55,6 +55,9 @@ const colorPalettes = [
 let timeStringCached = '';
 let graphics = [];
 
+const timeSeed = Date.now();
+const timeRandom = () => ((timeSeed * 51327) % 311731) / 311731;
+
 init();
 
 function init() {
@@ -62,7 +65,7 @@ function init() {
 
   const colorPaletteIndex = window['COLOR_PALETTE'] !== undefined
     ? window['COLOR_PALETTE']
-    : Math.floor(Math.random() * colorPalettes.length);
+    : Math.floor(timeRandom() * colorPalettes.length);
   const colorPalette = colorPalettes[colorPaletteIndex];
   const [backgroundColor, foregroundColor] = colorPalette;
   const raysColorPalette = colorPalette.slice(2);
